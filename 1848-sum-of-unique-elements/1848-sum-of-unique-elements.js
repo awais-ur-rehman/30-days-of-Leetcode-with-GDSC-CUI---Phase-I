@@ -1,25 +1,17 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
 var sumOfUnique = function(nums) {
+    const numCount = new Map();
     let answer = 0;
-    let temp = [];
-    for (let i = 0; i < nums.length; i++){
-        let count = 0;
-        for (let j = 0; j < nums.length; j++){
-            if(nums[i] === nums[j]){
-                count++;
-            }
-        }
-        if(count === 1){
-            temp.push(nums[i]);
-        }
-    
+
+    for (let num of nums) {
+        numCount.set(num, (numCount.get(num) || 0) + 1);
     }
-    for (let k = 0; k < temp.length ; k++){
-        answer = answer + temp[k];
+
+    for (let [num, count] of numCount.entries()) {
+        if (count === 1) {
+            answer += num;
+        }
     }
+
     return answer;
 };
 
